@@ -19,16 +19,16 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictInt, StrictStr
 from petstore_api.models.read_only_first import ReadOnlyFirst
 
 class ArrayTest(BaseModel):
     """
     ArrayTest
     """
-    array_of_string: Optional[conlist(StrictStr, max_items=3, min_items=0)] = None
-    array_array_of_integer: Optional[conlist(conlist(StrictInt))] = None
-    array_array_of_model: Optional[conlist(conlist(ReadOnlyFirst))] = None
+    array_of_string: Optional[List[StrictStr]] = Field(None, max_items=3, min_items=0)
+    array_array_of_integer: Optional[List[List[StrictInt]]] = None
+    array_array_of_model: Optional[List[List[ReadOnlyFirst]]] = None
     additional_properties: Dict[str, Any] = {}
     __properties = ["array_of_string", "array_array_of_integer", "array_array_of_model"]
 

@@ -19,7 +19,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr
 from petstore_api.models.deprecated_object import DeprecatedObject
 
 class ObjectWithDeprecatedFields(BaseModel):
@@ -29,7 +29,7 @@ class ObjectWithDeprecatedFields(BaseModel):
     uuid: Optional[StrictStr] = None
     id: Optional[float] = None
     deprecated_ref: Optional[DeprecatedObject] = Field(None, alias="deprecatedRef")
-    bars: Optional[conlist(StrictStr)] = None
+    bars: Optional[List[StrictStr]] = None
     __properties = ["uuid", "id", "deprecatedRef", "bars"]
 
     class Config:

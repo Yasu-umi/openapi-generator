@@ -19,7 +19,7 @@ import json
 
 from datetime import date, datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 
 class NullableClass(BaseModel):
     """
@@ -32,9 +32,9 @@ class NullableClass(BaseModel):
     string_prop: Optional[StrictStr] = None
     date_prop: Optional[date] = None
     datetime_prop: Optional[datetime] = None
-    array_nullable_prop: Optional[conlist(Dict[str, Any])] = None
-    array_and_items_nullable_prop: Optional[conlist(Dict[str, Any])] = None
-    array_items_nullable: Optional[conlist(Dict[str, Any])] = None
+    array_nullable_prop: Optional[List[Dict[str, Any]]] = None
+    array_and_items_nullable_prop: Optional[List[Dict[str, Any]]] = None
+    array_items_nullable: Optional[List[Dict[str, Any]]] = None
     object_nullable_prop: Optional[Dict[str, Dict[str, Any]]] = None
     object_and_items_nullable_prop: Optional[Dict[str, Dict[str, Any]]] = None
     object_items_nullable: Optional[Dict[str, Dict[str, Any]]] = None

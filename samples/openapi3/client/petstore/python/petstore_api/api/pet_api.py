@@ -19,7 +19,7 @@ import warnings
 from pydantic import validate_arguments, ValidationError
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictInt, StrictStr, conlist, validator
+from pydantic import Field, StrictBytes, StrictInt, StrictStr, validator
 
 from typing import List, Optional, Union
 
@@ -328,7 +328,7 @@ class PetApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def find_pets_by_status(self, status : Annotated[conlist(StrictStr), Field(..., description="Status values that need to be considered for filter")], **kwargs) -> List[Pet]:  # noqa: E501
+    def find_pets_by_status(self, status : Annotated[List[StrictStr], Field(..., description="Status values that need to be considered for filter")], **kwargs) -> List[Pet]:  # noqa: E501
         """Finds Pets by status  # noqa: E501
 
         Multiple status values can be provided with comma separated strings  # noqa: E501
@@ -357,7 +357,7 @@ class PetApi(object):
         return self.find_pets_by_status_with_http_info(status, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def find_pets_by_status_with_http_info(self, status : Annotated[conlist(StrictStr), Field(..., description="Status values that need to be considered for filter")], **kwargs) -> ApiResponse:  # noqa: E501
+    def find_pets_by_status_with_http_info(self, status : Annotated[List[StrictStr], Field(..., description="Status values that need to be considered for filter")], **kwargs) -> ApiResponse:  # noqa: E501
         """Finds Pets by status  # noqa: E501
 
         Multiple status values can be provided with comma separated strings  # noqa: E501
@@ -469,7 +469,7 @@ class PetApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def find_pets_by_tags(self, tags : Annotated[conlist(StrictStr, unique_items=True), Field(..., description="Tags to filter by")], **kwargs) -> List[Pet]:  # noqa: E501
+    def find_pets_by_tags(self, tags : Annotated[List[StrictStr], Field(..., description="Tags to filter by")], **kwargs) -> List[Pet]:  # noqa: E501
         """(Deprecated) Finds Pets by tags  # noqa: E501
 
         Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.  # noqa: E501
@@ -498,7 +498,7 @@ class PetApi(object):
         return self.find_pets_by_tags_with_http_info(tags, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def find_pets_by_tags_with_http_info(self, tags : Annotated[conlist(StrictStr, unique_items=True), Field(..., description="Tags to filter by")], **kwargs) -> ApiResponse:  # noqa: E501
+    def find_pets_by_tags_with_http_info(self, tags : Annotated[List[StrictStr], Field(..., description="Tags to filter by")], **kwargs) -> ApiResponse:  # noqa: E501
         """(Deprecated) Finds Pets by tags  # noqa: E501
 
         Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.  # noqa: E501

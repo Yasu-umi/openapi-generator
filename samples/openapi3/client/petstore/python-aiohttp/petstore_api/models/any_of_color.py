@@ -19,7 +19,7 @@ import pprint
 import re  # noqa: F401
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, conint, conlist, constr, validator
+from pydantic import BaseModel, Field, StrictStr, ValidationError, conint, constr, validator
 from typing import Any, List
 from pydantic import StrictStr, Field
 
@@ -31,9 +31,9 @@ class AnyOfColor(BaseModel):
     """
 
     # data type: List[int]
-    anyof_schema_1_validator: Optional[conlist(conint(strict=True, le=255, ge=0), max_items=3, min_items=3)] = Field(None, description="RGB three element array with values 0-255.")
+    anyof_schema_1_validator: Optional[List[conint(strict=True, le=255, ge=0)]] = Field(None, description="RGB three element array with values 0-255.", max_items=3, min_items=3)
     # data type: List[int]
-    anyof_schema_2_validator: Optional[conlist(conint(strict=True, le=255, ge=0), max_items=4, min_items=4)] = Field(None, description="RGBA four element array with values 0-255.")
+    anyof_schema_2_validator: Optional[List[conint(strict=True, le=255, ge=0)]] = Field(None, description="RGBA four element array with values 0-255.", max_items=4, min_items=4)
     # data type: str
     anyof_schema_3_validator: Optional[constr(strict=True, max_length=7, min_length=7)] = Field(None, description="Hex color string, such as #00FF00.")
     actual_instance: Any

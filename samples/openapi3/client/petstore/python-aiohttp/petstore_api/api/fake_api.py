@@ -22,7 +22,7 @@ from typing import overload, Optional, Union, Awaitable
 
 from datetime import date, datetime
 
-from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, conbytes, confloat, conint, conlist, constr, validator
+from pydantic import Field, StrictBool, StrictBytes, StrictInt, StrictStr, conbytes, confloat, conint, constr, validator
 
 from typing import Any, Dict, Optional, Union
 
@@ -2950,15 +2950,15 @@ class FakeApi(object):
             _request_auth=_params.get('_request_auth'))
 
     @overload
-    async def test_query_parameter_collection_format(self, pipe : conlist(StrictStr), ioutil : conlist(StrictStr), http : conlist(StrictStr), url : conlist(StrictStr), context : conlist(StrictStr), allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, **kwargs) -> None:  # noqa: E501
+    async def test_query_parameter_collection_format(self, pipe : List[StrictStr], ioutil : List[StrictStr], http : List[StrictStr], url : List[StrictStr], context : List[StrictStr], allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, **kwargs) -> None:  # noqa: E501
         ...
 
     @overload
-    def test_query_parameter_collection_format(self, pipe : conlist(StrictStr), ioutil : conlist(StrictStr), http : conlist(StrictStr), url : conlist(StrictStr), context : conlist(StrictStr), allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, async_req: Optional[bool]=True, **kwargs) -> None:  # noqa: E501
+    def test_query_parameter_collection_format(self, pipe : List[StrictStr], ioutil : List[StrictStr], http : List[StrictStr], url : List[StrictStr], context : List[StrictStr], allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, async_req: Optional[bool]=True, **kwargs) -> None:  # noqa: E501
         ...
 
     @validate_arguments
-    def test_query_parameter_collection_format(self, pipe : conlist(StrictStr), ioutil : conlist(StrictStr), http : conlist(StrictStr), url : conlist(StrictStr), context : conlist(StrictStr), allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
+    def test_query_parameter_collection_format(self, pipe : List[StrictStr], ioutil : List[StrictStr], http : List[StrictStr], url : List[StrictStr], context : List[StrictStr], allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, async_req: Optional[bool]=None, **kwargs) -> Union[None, Awaitable[None]]:  # noqa: E501
         """test_query_parameter_collection_format  # noqa: E501
 
         To test the collection format in query parameters  # noqa: E501
@@ -3001,7 +3001,7 @@ class FakeApi(object):
         return self.test_query_parameter_collection_format_with_http_info(pipe, ioutil, http, url, context, allow_empty, language, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def test_query_parameter_collection_format_with_http_info(self, pipe : conlist(StrictStr), ioutil : conlist(StrictStr), http : conlist(StrictStr), url : conlist(StrictStr), context : conlist(StrictStr), allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def test_query_parameter_collection_format_with_http_info(self, pipe : List[StrictStr], ioutil : List[StrictStr], http : List[StrictStr], url : List[StrictStr], context : List[StrictStr], allow_empty : StrictStr, language : Optional[Dict[str, StrictStr]] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """test_query_parameter_collection_format  # noqa: E501
 
         To test the collection format in query parameters  # noqa: E501

@@ -431,20 +431,8 @@ public class PythonClientCodegen extends AbstractPythonCodegen implements Codege
         }
 
         if (cp.isArray) {
-            String constraints = "";
-            if (cp.maxItems != null) {
-                constraints += String.format(Locale.ROOT, ", max_items=%d", cp.maxItems);
-            }
-            if (cp.minItems != null) {
-                constraints += String.format(Locale.ROOT, ", min_items=%d", cp.minItems);
-            }
-            if (cp.getUniqueItems()) {
-                constraints += ", unique_items=True";
-            }
-            pydanticImports.add("conlist");
-            return String.format(Locale.ROOT, "conlist(%s%s)",
-                    getPydanticType(cp.items, typingImports, pydanticImports, datetimeImports, modelImports, exampleImports, classname),
-                    constraints);
+            return String.format(Locale.ROOT, "List[%s]",
+                    getPydanticType(cp.items, typingImports, pydanticImports, datetimeImports, modelImports, exampleImports, classname));
         } else if (cp.isMap) {
             typingImports.add("Dict");
             return String.format(Locale.ROOT, "Dict[str, %s]",
@@ -711,21 +699,8 @@ public class PythonClientCodegen extends AbstractPythonCodegen implements Codege
             return String.format(Locale.ROOT, "%sEnum", cp.nameInCamelCase);
         } else*/
         if (cp.isArray) {
-            String constraints = "";
-            if (cp.maxItems != null) {
-                constraints += String.format(Locale.ROOT, ", max_items=%d", cp.maxItems);
-            }
-            if (cp.minItems != null) {
-                constraints += String.format(Locale.ROOT, ", min_items=%d", cp.minItems);
-            }
-            if (cp.getUniqueItems()) {
-                constraints += ", unique_items=True";
-            }
-            pydanticImports.add("conlist");
             typingImports.add("List"); // for return type
-            return String.format(Locale.ROOT, "conlist(%s%s)",
-                    getPydanticType(cp.items, typingImports, pydanticImports, datetimeImports, modelImports, exampleImports, classname),
-                    constraints);
+            return String.format(Locale.ROOT, "List[%s]", getPydanticType(cp.items, typingImports, pydanticImports, datetimeImports, modelImports, exampleImports, classname));
         } else if (cp.isMap) {
             typingImports.add("Dict");
             return String.format(Locale.ROOT, "Dict[str, %s]", getPydanticType(cp.items, typingImports, pydanticImports, datetimeImports, modelImports, exampleImports, classname));
@@ -1268,6 +1243,17 @@ public class PythonClientCodegen extends AbstractPythonCodegen implements Codege
 
                 if (!StringUtils.isEmpty(cp.description)) { // has description
                     fields.add(String.format(Locale.ROOT, "description=\"%s\"", cp.description));
+                }
+                if (cp.isArray) {
+                    if (cp.maxItems != null) {
+                        fields.add(String.format(Locale.ROOT, "max_items=%d", cp.maxItems));
+                    }
+                    if (cp.minItems != null) {
+                        fields.add(String.format(Locale.ROOT, "min_items=%d", cp.minItems));
+                    }
+                    if (cp.getUniqueItems()) {
+                        fields.add("unique_items=True");
+                    }
                 }
 
                 /* TODO review as example may break the build
